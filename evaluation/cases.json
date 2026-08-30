@@ -1,0 +1,57 @@
+[
+  {
+    "id": "case-01",
+    "title": "Google Authentication",
+    "task": "Add Google OAuth login to an existing Next.js SaaS application. Existing users should continue to be able to log in with email and password."
+  },
+  {
+    "id": "case-02",
+    "title": "PDF Upload",
+    "task": "Build a file upload feature that allows users to upload PDF documents and view their upload history."
+  },
+  {
+    "id": "case-03",
+    "title": "Stripe Subscriptions",
+    "task": "Add Stripe subscriptions to our Next.js SaaS application. Users should be able to upgrade, downgrade, and cancel their subscription."
+  },
+  {
+    "id": "case-04",
+    "title": "Pagination",
+    "task": "Add pagination to the customer list in our web application. Users should be able to move between pages and see how many results exist."
+  },
+  {
+    "id": "case-05",
+    "title": "Password Reset",
+    "task": "Add a password reset flow so users can request a reset email and securely create a new password."
+  },
+  {
+    "id": "case-06",
+    "title": "Email Notifications",
+    "task": "Add email notifications when an important account event occurs. Users should be able to manage their notification preference."
+  },
+  {
+    "id": "case-07",
+    "title": "Image Upload",
+    "task": "Allow users to upload profile images and replace their existing profile image."
+  },
+  {
+    "id": "case-08",
+    "title": "Role Permissions",
+    "task": "Add role-based permissions to an internal application. Administrators should have access to functionality that regular users do not."
+  },
+  {
+    "id": "case-09",
+    "title": "Search",
+    "task": "Add search functionality to an existing product catalog so users can find products by name."
+  },
+  {
+    "id": "case-10",
+    "title": "Payment Webhook",
+    "task": "Add payment webhook handling to update an application's order status when the payment provider confirms a successful payment."
+  },
+  {
+    "id": "case-11",
+    "title": "Authentication Migration",
+    "task": "Migrate the existing authentication system to a new authentication provider without breaking currently authenticated users or existing accounts."
+  }
+]

@@ -1,0 +1,52 @@
+{
+  "name": "Developer Task Review Rubric",
+  "version": "1.0",
+  "maximumScore": 30,
+  "primaryMetric": "Requirement Coverage Score",
+  "categories": [
+    {
+      "id": "requirements",
+      "name": "Requirement identification",
+      "maximum": 5,
+      "description": "Correctly identifies what the task explicitly asks for."
+    },
+    {
+      "id": "technical",
+      "name": "Technical considerations",
+      "maximum": 5,
+      "description": "Identifies relevant architecture, APIs, data, security, validation and integration considerations without inventing facts."
+    },
+    {
+      "id": "missing",
+      "name": "Missing information",
+      "maximum": 5,
+      "description": "Identifies important unknowns that should be clarified before implementation."
+    },
+    {
+      "id": "risks",
+      "name": "Risk identification",
+      "maximum": 5,
+      "description": "Identifies realistic implementation and operational risks."
+    },
+    {
+      "id": "edgeCases",
+      "name": "Edge cases",
+      "maximum": 5,
+      "description": "Identifies meaningful failure modes and edge cases."
+    },
+    {
+      "id": "verification",
+      "name": "Verification quality",
+      "maximum": 5,
+      "description": "Provides a concrete way to verify that the implementation satisfies the original task."
+    }
+  ],
+  "scoringGuidance": {
+    "0": "Missing or incorrect.",
+    "1": "Very weak coverage.",
+    "2": "Partially useful.",
+    "3": "Reasonable coverage.",
+    "4": "Strong coverage.",
+    "5": "Excellent, specific and evidence-oriented coverage."
+  }
+}

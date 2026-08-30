@@ -1,0 +1,26 @@
+{
+  "evaluation": {
+    "date": "",
+    "model": "",
+    "cases": 10,
+    "primaryMetric": "Requirement Coverage Score",
+    "maximumScore": 30
+  },
+  "baseline": {
+    "scores": [],
+    "average": null
+  },
+  "agentSolution": {
+    "scores": [],
+    "average": null
+  },
+  "improvement": {
+    "absolute": null,
+    "percentage": null
+  },
+  "humanTime": {
+    "baselineAverageMinutes": null,
+    "agentAverageMinutes": null
+  },
+  "notes": "Do not enter fabricated values. Populate after running the actual evaluation."
+}

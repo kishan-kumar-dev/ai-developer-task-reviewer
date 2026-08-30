@@ -1,0 +1,13 @@
+Build a full-stack e-commerce application.
+
+Requirements:
+- User registration and login.
+- Product catalog.
+- Search and category filtering.
+- Shopping cart.
+- Stripe checkout.
+- Secure Stripe webhook handling.
+- PostgreSQL order persistence.
+- Inventory management.
+- Order history.
+- Tests for critical payment and inventory behavior.
