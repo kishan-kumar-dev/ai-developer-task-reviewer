@@ -1,52 +1,42 @@
 {
-  "name": "Developer Task Review Rubric",
-  "version": "1.0",
-  "maximumScore": 30,
+  "name": "Developer Task Review Evaluation Rubric",
+  "version": "2.0",
   "primaryMetric": "Requirement Coverage Score",
+  "metricFormula": "matched expected signals / total expected signals * 100",
+  "evaluationCases": 12,
+  "workflowAgents": 5,
   "categories": [
     {
-      "id": "requirements",
-      "name": "Requirement identification",
-      "maximum": 5,
-      "description": "Correctly identifies what the task explicitly asks for."
+      "id": "requirementCoverage",
+      "name": "Requirement Coverage",
+      "description": "Measures how many predefined expected requirement signals are present in the evaluated output.",
+      "range": "0-100"
     },
     {
-      "id": "technical",
-      "name": "Technical considerations",
-      "maximum": 5,
-      "description": "Identifies relevant architecture, APIs, data, security, validation and integration considerations without inventing facts."
-    },
-    {
-      "id": "missing",
-      "name": "Missing information",
-      "maximum": 5,
-      "description": "Identifies important unknowns that should be clarified before implementation."
-    },
-    {
-      "id": "risks",
-      "name": "Risk identification",
-      "maximum": 5,
-      "description": "Identifies realistic implementation and operational risks."
-    },
-    {
-      "id": "edgeCases",
-      "name": "Edge cases",
-      "maximum": 5,
-      "description": "Identifies meaningful failure modes and edge cases."
-    },
-    {
-      "id": "verification",
-      "name": "Verification quality",
-      "maximum": 5,
-      "description": "Provides a concrete way to verify that the implementation satisfies the original task."
+      "id": "workflowValidation",
+      "name": "Workflow Validation",
+      "description": "Confirms that the expected five-agent workflow executes successfully and produces requirements, findings, final synthesis, and traces.",
+      "expectedAgents": 5
     }
   ],
-  "scoringGuidance": {
-    "0": "Missing or incorrect.",
-    "1": "Very weak coverage.",
-    "2": "Partially useful.",
-    "3": "Reasonable coverage.",
-    "4": "Strong coverage.",
-    "5": "Excellent, specific and evidence-oriented coverage."
+  "interpretation": {
+    "positive": "The agent workflow provides broader requirement-signal coverage than the baseline.",
+    "equal": "The agent workflow and baseline provide equal requirement-signal coverage.",
+    "negative": "The agent workflow has lower requirement-signal coverage than the baseline for the case."
+  },
+  "limitations": [
+    "The metric is based on predefined textual requirement signals.",
+    "The metric does not measure complete software quality.",
+    "The metric does not prove production readiness.",
+    "A keyword-signal regression does not necessarily mean the engineering review is objectively worse.",
+    "Automated results should be interpreted together with agent trajectories, repository evidence, verification findings, and human review."
+  ],
+  "currentResult": {
+    "baselineAverage": 30,
+    "agentAverage": 49,
+    "averageImprovement": 19,
+    "improvedCases": 8,
+    "equalCases": 3,
+    "worseCases": 1
   }
 }

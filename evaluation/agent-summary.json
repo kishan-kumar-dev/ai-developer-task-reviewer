@@ -1,0 +1,134 @@
+﻿[
+    {
+        "Case":  "CASE-001",
+        "Name":  "E-commerce",
+        "Success":  true,
+        "Mode":  "live",
+        "Requirements":  10,
+        "Findings":  10,
+        "Agents":  5,
+        "RuntimeSeconds":  1.51,
+        "Output":  "evaluation\\CASE-001-agent.json"
+    },
+    {
+        "Case":  "CASE-002",
+        "Name":  "Authentication",
+        "Success":  true,
+        "Mode":  "live",
+        "Requirements":  2,
+        "Findings":  2,
+        "Agents":  5,
+        "RuntimeSeconds":  0.31,
+        "Output":  "evaluation\\CASE-002-agent.json"
+    },
+    {
+        "Case":  "CASE-003",
+        "Name":  "REST API",
+        "Success":  true,
+        "Mode":  "live",
+        "Requirements":  3,
+        "Findings":  3,
+        "Agents":  5,
+        "RuntimeSeconds":  0.32,
+        "Output":  "evaluation\\CASE-003-agent.json"
+    },
+    {
+        "Case":  "CASE-004",
+        "Name":  "Payment",
+        "Success":  true,
+        "Mode":  "live",
+        "Requirements":  3,
+        "Findings":  3,
+        "Agents":  5,
+        "RuntimeSeconds":  0.37,
+        "Output":  "evaluation\\CASE-004-agent.json"
+    },
+    {
+        "Case":  "CASE-005",
+        "Name":  "Inventory",
+        "Success":  true,
+        "Mode":  "live",
+        "Requirements":  3,
+        "Findings":  3,
+        "Agents":  5,
+        "RuntimeSeconds":  0.29,
+        "Output":  "evaluation\\CASE-005-agent.json"
+    },
+    {
+        "Case":  "CASE-006",
+        "Name":  "Order History",
+        "Success":  true,
+        "Mode":  "live",
+        "Requirements":  1,
+        "Findings":  1,
+        "Agents":  5,
+        "RuntimeSeconds":  0.29,
+        "Output":  "evaluation\\CASE-006-agent.json"
+    },
+    {
+        "Case":  "CASE-007",
+        "Name":  "Search",
+        "Success":  true,
+        "Mode":  "live",
+        "Requirements":  3,
+        "Findings":  3,
+        "Agents":  5,
+        "RuntimeSeconds":  0.34,
+        "Output":  "evaluation\\CASE-007-agent.json"
+    },
+    {
+        "Case":  "CASE-008",
+        "Name":  "Database",
+        "Success":  true,
+        "Mode":  "live",
+        "Requirements":  2,
+        "Findings":  2,
+        "Agents":  5,
+        "RuntimeSeconds":  0.3,
+        "Output":  "evaluation\\CASE-008-agent.json"
+    },
+    {
+        "Case":  "CASE-009",
+        "Name":  "Security",
+        "Success":  true,
+        "Mode":  "live",
+        "Requirements":  1,
+        "Findings":  1,
+        "Agents":  5,
+        "RuntimeSeconds":  0.31,
+        "Output":  "evaluation\\CASE-009-agent.json"
+    },
+    {
+        "Case":  "CASE-010",
+        "Name":  "Testing",
+        "Success":  true,
+        "Mode":  "live",
+        "Requirements":  1,
+        "Findings":  1,
+        "Agents":  5,
+        "RuntimeSeconds":  0.31,
+        "Output":  "evaluation\\CASE-010-agent.json"
+    },
+    {
+        "Case":  "CASE-011",
+        "Name":  "Ambiguous Requirement",
+        "Success":  true,
+        "Mode":  "live",
+        "Requirements":  1,
+        "Findings":  1,
+        "Agents":  5,
+        "RuntimeSeconds":  0.29,
+        "Output":  "evaluation\\CASE-011-agent.json"
+    },
+    {
+        "Case":  "CASE-012",
+        "Name":  "Conflicting Requirements",
+        "Success":  true,
+        "Mode":  "live",
+        "Requirements":  4,
+        "Findings":  4,
+        "Agents":  5,
+        "RuntimeSeconds":  0.34,
+        "Output":  "evaluation\\CASE-012-agent.json"
+    }
+]

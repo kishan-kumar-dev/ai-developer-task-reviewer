@@ -1,117 +1,286 @@
 # AI Developer Task Reviewer
 
-### Agentic Workflows Hackathon
-
-Turn ambiguous software development tasks into reliable, developer-ready implementation plans using a four-stage multi-agent workflow.
-
-**Research → Analysis → Verification → Final**
-
----
+> Turn ambiguous software-development tasks into reliable, evidence-backed, developer-ready implementation reviews.
 
 ## Overview
 
-**AI Developer Task Reviewer** is a Next.js application that helps developers transform a software feature request or engineering problem into a structured implementation plan.
+AI Developer Task Reviewer is a multi-agent workflow for reviewing software-development tasks against an actual candidate repository.
 
-The application uses four specialized agents:
-
-1. **Research Agent** — extracts requirements, technical considerations, missing information, and risks.
-2. **Analysis Agent** — converts the research into a practical implementation strategy.
-3. **Verification Agent** — checks assumptions, omissions, contradictions, and edge cases.
-4. **Final Solution Agent** — produces a developer-ready implementation plan.
-
-The workflow passes the output of each stage to the next stage, creating a sequential agentic workflow.
-
----
-
-## Features
-
-* Four-stage agentic workflow
-* Research → Analysis → Verification → Final pipeline
-* Deterministic Demo Mode
-* Optional Live Gemini execution
-* Gemini API integration
-* Gemini rate-limit/quota handling
-* Input validation
-* Error handling
-* Developer-friendly implementation plans
-* Example developer tasks
-* Clear/reset workflow
-* Responsive UI
-* Production-ready Next.js build
-
----
-
-## Execution Modes
-
-### Demo Mode
-
-Demo Mode runs the workflow locally using deterministic responses.
-
-Advantages:
-
-* Does not consume Gemini API quota
-* Reproducible results
-* Reliable for demonstrations and judging
-* Works without an active Gemini API request
-
-### Live Gemini
-
-Live Gemini executes the four agents using the configured Google Gemini API.
-
-The application reads the API key from:
+Instead of relying on a single prompt to understand the task, inspect the repository, identify gaps, and produce a final review, the system separates these responsibilities across specialized agents.
 
 ```text
-GEMINI_API_KEY
+Developer Task
+      ↓
+Research Agent
+      ↓
+Requirement Normalizer
+      ↓
+Repository Implementation Agent
+      ↓
+Verification Agent
+      ↓
+Final Solution Agent
+      ↓
+Developer-Ready Review
 ```
 
-The API key is kept server-side and should never be committed to GitHub.
+The core principle is **responsibility separation + evidence flow**.
+
+Each stage receives structured context from the previous stage and contributes evidence to the final review.
 
 ---
 
 ## Agent Workflow
 
-```text
-Developer Task
-      │
-      ▼
-┌─────────────────┐
-│ Research Agent  │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│ Analysis Agent  │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────────┐
-│ Verification Agent  │
-└────────┬────────────┘
-         │
-         ▼
-┌─────────────────────┐
-│ Final Solution Agent│
-└────────┬────────────┘
-         │
-         ▼
-Developer-Ready
-Implementation Plan
-```
+### 01 — Research Agent
 
-Each stage receives relevant information from the previous stage.
+The Research Agent analyzes the developer task before repository inspection.
+
+It identifies:
+
+* user intent
+* explicit requirements
+* technical considerations
+* missing information
+* risks
+
+This stage establishes the context that downstream agents should evaluate.
 
 ---
 
-## Tech Stack
+### 02 — Requirement Normalizer Agent
 
-* Next.js 16
-* React 19
-* TypeScript
-* Tailwind CSS
-* Google Gemini API
-* `@google/genai`
-* ESLint
-* TSX
+The Requirement Normalizer converts research output into stable, structured, testable requirements.
+
+Each requirement becomes a concrete target that can later be checked against the candidate implementation.
+
+This prevents downstream stages from relying only on loosely structured planning text.
+
+---
+
+### 03 — Repository Implementation Agent
+
+The Repository Implementation Agent inspects the actual candidate repository.
+
+It:
+
+* examines relevant files
+* identifies implementation evidence
+* maps evidence to normalized requirements
+* reports implementation gaps
+* distinguishes repository evidence from assumptions
+
+This is the main evidence-backed inspection stage.
+
+---
+
+### 04 — Verification Agent
+
+The Verification Agent independently challenges the repository findings.
+
+It checks:
+
+* requirement coverage
+* implementation findings
+* unsupported conclusions
+* missing evidence
+* risks
+* edge cases
+* contradictions
+
+The purpose is to prevent the first repository analysis from being accepted without additional scrutiny.
+
+---
+
+### 05 — Final Solution Agent
+
+The Final Solution Agent synthesizes the verified context into a developer-ready review.
+
+The final review contains:
+
+* summary
+* strengths
+* gaps
+* risks
+* recommendations
+* overall assessment
+
+The application exposes the final result rather than requiring users to interpret raw intermediate agent output.
+
+---
+
+# Research → Normalize → Inspect → Verify → Final Solution
+
+The complete workflow can be represented as:
+
+```text
+┌─────────────────────┐
+│   Developer Task    │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│   Research Agent    │
+│ Context + Risks     │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│ Requirement         │
+│ Normalizer Agent    │
+│ Stable Requirements │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│ Repository          │
+│ Implementation      │
+│ Agent               │
+│ Evidence + Gaps     │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│ Verification Agent  │
+│ Challenges Findings │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│ Final Solution      │
+│ Developer Review    │
+└─────────────────────┘
+```
+
+---
+
+## Deterministic Demo Mode
+
+The application includes a deterministic local Demo Mode.
+
+Live Gemini execution can depend on:
+
+* API availability
+* network access
+* model availability
+* quota
+
+For hackathon evaluation, deterministic execution provides a reproducible way to exercise the complete `/api/analyze` workflow without depending on live model access.
+
+Demo Mode still calls the application's real analysis endpoint and returns structured workflow results.
+
+Live Gemini execution remains available separately for model-backed analysis.
+
+---
+
+## Evaluation
+
+The final workflow was evaluated against **12 fixed software-development cases**.
+
+### Evaluation Metrics
+
+The primary automated metric is:
+
+**Requirement Coverage Score**
+
+For each evaluation case, a fixed set of expected requirement signals is defined.
+
+```text
+matched expected signals
+────────────────────────── × 100
+total expected signals
+```
+
+The metric intentionally measures requirement-signal coverage.
+
+It does **not** claim to measure overall software quality.
+
+### Results
+
+| Metric                            |                Result |
+| --------------------------------- | --------------------: |
+| Evaluation cases                  |                    12 |
+| Baseline average                  |                   30% |
+| Agent workflow average            |                   49% |
+| Average improvement               | +19 percentage points |
+| Improved cases                    |                  8/12 |
+| Equal cases                       |                  3/12 |
+| Worse cases                       |                  1/12 |
+| Total requirements evaluated      |                    60 |
+| Total findings produced           |                    60 |
+| Agent executions                  |                    60 |
+| Agents per repository-backed case |                     5 |
+
+### Case Results
+
+| Case                 | Baseline | Agent Workflow | Difference |
+| -------------------- | -------: | -------------: | ---------: |
+| PDF Upload           |      20% |            60% |        +40 |
+| Stripe Subscriptions |      17% |            50% |        +33 |
+| Google Login         |      20% |            40% |        +20 |
+| Search               |      40% |            40% |         +0 |
+| Email Notifications  |      40% |            40% |         +0 |
+| CSV Import           |      20% |            60% |        +40 |
+| Password Reset       |      20% |            40% |        +20 |
+| Image Processing     |      60% |            60% |         +0 |
+| Admin Dashboard      |      20% |            40% |        +20 |
+| Inventory Update     |      20% |            40% |        +20 |
+| API Rate Limiting    |      60% |            40% |        -20 |
+| File Export          |      20% |            80% |        +60 |
+| **Average**          |  **30%** |        **49%** |    **+19** |
+
+### Strongest Improvement
+
+The **File Export** case produced the largest measured improvement.
+
+* Baseline: 20%
+* Agent workflow: 80%
+* Improvement: **+60 percentage points**
+
+The workflow surfaced authorization, privacy, validation, security, and testing considerations more effectively for this case.
+
+### Challenging Case
+
+The **Inventory Update** case was challenging because it involves:
+
+* transactions
+* duplicate processing
+* concurrency
+* failure handling
+* automated testing
+
+Results:
+
+* Baseline: 20%
+* Agent workflow: 40%
+* Improvement: **+20 percentage points**
+
+The result demonstrates improved requirement coverage while also showing that reliability-sensitive requirements require deeper repository evidence and verification.
+
+### Regression Case
+
+**API Rate Limiting** was the only measured regression.
+
+* Baseline: 60%
+* Agent workflow: 40%
+* Difference: **-20 percentage points**
+
+The regression is intentionally retained.
+
+The automated scorer is based on literal expected-signal presence. A lower keyword-signal score therefore does not necessarily mean that the generated engineering review is objectively worse.
+
+This limitation is reported rather than hidden.
+
+---
+
+## Workflow Validation
+
+Every evaluated workflow execution successfully returned structured results.
+
+The repository-backed evaluation produced:
+
+* normalized requirements
+* implementation findings
+* verification output
+* final synthesis
+* five agent traces
+
+The evaluation therefore exercises the actual `/api/analyze` workflow rather than comparing static responses.
 
 ---
 
@@ -120,62 +289,69 @@ Each stage receives relevant information from the previous stage.
 ```text
 agentic-workflow-hackathon/
 │
+├── docs/
+│   └── IMPROVEMENT_CHANGELOG.md
+│
+├── evaluation/
+│   ├── CASE-001-agent.json
+│   ├── CASE-002-agent.json
+│   ├── CASE-003-agent.json
+│   ├── CASE-004-agent.json
+│   ├── CASE-005-agent.json
+│   ├── CASE-006-agent.json
+│   ├── CASE-007-agent.json
+│   ├── CASE-008-agent.json
+│   ├── CASE-009-agent.json
+│   ├── CASE-010-agent.json
+│   ├── CASE-011-agent.json
+│   ├── CASE-012-agent.json
+│   ├── agent-summary.json
+│   ├── report.md
+│   ├── results.json
+│   ├── results.md
+│   ├── rubric.json
+│   ├── rubric.md
+│   ├── run.ts
+│   └── run-evaluation.ps1
+│
 ├── src/
 │   ├── app/
 │   │   ├── api/
 │   │   │   └── analyze/
 │   │   │       └── route.ts
-│   │   │
-│   │   ├── layout.tsx
-│   │   └── page.tsx
+│   │   ├── page.tsx
+│   │   └── ...
 │   │
 │   └── lib/
-│       ├── agents.ts
+│       ├── agents/
+│       ├── llm/
+│       ├── tools/
 │       ├── demo.ts
-│       └── gemini.ts
+│       └── types.ts
 │
 ├── evaluate.ts
 ├── package.json
-├── README.md
-├── .gitignore
-└── ...
+├── package-lock.json
+└── README.md
 ```
 
 ---
 
-## Getting Started
+## Running the Application
 
-### 1. Install dependencies
+Install dependencies:
 
-```bash
+```powershell
 npm install
 ```
 
-### 2. Configure Gemini
+Start the development server:
 
-Create a local environment file:
-
-```text
-.env.local
-```
-
-Add:
-
-```env
-GEMINI_API_KEY=your_gemini_api_key
-```
-
-Do not commit `.env.local`.
-
----
-
-## Run Development Server
-
-```bash
+```powershell
 npm run dev
 ```
 
-Open:
+Then open:
 
 ```text
 http://localhost:3000
@@ -183,195 +359,126 @@ http://localhost:3000
 
 ---
 
-## Available Commands
+## Environment Variables
 
-### Development
+For live Gemini execution, configure the required Gemini API key in your local environment.
 
-```bash
-npm run dev
-```
+Create a `.env.local` file if required by the current implementation.
 
-### Lint
-
-```bash
-npm run lint
-```
-
-### Evaluation
-
-```bash
-npm run evaluate
-```
-
-### Production Build
-
-```bash
-npm run build
-```
-
-### Production Server
-
-```bash
-npm run start
-```
-
----
-
-## Evaluation
-
-The project includes a deterministic evaluation script.
-
-Run:
-
-```bash
-npm run evaluate
-```
-
-The evaluation verifies:
-
-* API request succeeds
-* Demo Mode is active
-* Four agents execute
-* Research Agent exists
-* Verification Agent exists
-* Final Agent exists
-* Final result exists
-
-Expected result:
-
-```text
-AI Developer Task Reviewer Evaluation
-
-Testing Demo Mode...
-
-Evaluation Results:
-
-✅ API request succeeded
-✅ Demo mode is active
-✅ Four agents executed
-✅ Research Agent exists
-✅ Verification Agent exists
-✅ Final Agent exists
-✅ Final result exists
-
-✅ All evaluation checks passed.
-```
-
----
-
-## Quality Checks
-
-Before submission, run:
-
-```bash
-npm run lint
-npm run evaluate
-npm run build
-```
-
-The project should pass all three commands.
-
----
-
-## Example Task
-
-You can test the application with a task such as:
-
-```text
-Add Stripe subscriptions to our Next.js SaaS application.
-Users should be able to upgrade, downgrade, and cancel their subscription.
-```
-
-The workflow will analyze the request and produce a structured implementation plan.
-
----
-
-## Error Handling
-
-The application validates incoming tasks before processing them.
-
-It handles:
-
-* Invalid JSON
-* Missing tasks
-* Empty tasks
-* Gemini API errors
-* Gemini rate limits
-* Gemini quota errors
-* Unexpected server errors
-
-When Gemini returns a rate-limit or quota error, the API returns an appropriate `429` response instead of crashing the application.
-
----
-
-## Security
-
-The Gemini API key is stored in an environment variable:
+Example:
 
 ```env
-GEMINI_API_KEY
+GEMINI_API_KEY=your_api_key_here
 ```
 
-Environment files are excluded from Git through `.gitignore`.
+Do not commit real API keys or other secrets.
 
-Never commit:
+The repository should contain only safe example configuration.
 
-```text
-.env
-.env.local
-.env.production
+---
+
+## Running the Evaluation
+
+The evaluation can be run using the project's evaluation script.
+
+From PowerShell:
+
+```powershell
+.\evaluation\run-evaluation.ps1
 ```
 
----
-
-## Why Demo Mode?
-
-AI APIs can be affected by temporary quota limits or rate limits.
-
-Demo Mode provides a deterministic fallback for demonstrations and evaluation while keeping the real Gemini workflow available when API access is configured.
-
-This makes the application easier to judge and reproduce without depending entirely on external API availability.
-
----
-
-## Future Improvements
-
-Possible future enhancements include:
-
-* Streaming agent responses
-* Parallel research agents
-* Persistent analysis history
-* Authentication
-* Export implementation plans
-* Markdown/PDF export
-* Repository-aware analysis
-* GitHub repository integration
-* Additional specialized verification agents
-
-These are not required for the current workflow.
-
----
-
-## Hackathon Submission
-
-**Project:** AI Developer Task Reviewer
-
-**Workflow:**
+The evaluation produces structured artifacts including:
 
 ```text
-Research
-   ↓
-Analysis
-   ↓
+evaluation/results.json
+evaluation/results.md
+evaluation/report.md
+evaluation/agent-summary.json
+evaluation/CASE-001-agent.json
+...
+evaluation/CASE-012-agent.json
+```
+
+The exact generated files may change as the evaluation workflow evolves.
+
+---
+
+## Evaluation Transparency
+
+The evaluation intentionally reports both improvements and regressions.
+
+The final measured result is:
+
+```text
+30% baseline
+      ↓
+49% agent workflow
+      ↓
++19 percentage points
+```
+
+Across the fixed evaluation set:
+
+* 8 cases improved
+* 3 cases were equal
+* 1 case regressed
+
+The purpose of the evaluation is not to claim that a multi-agent system is universally superior.
+
+Instead, it demonstrates that responsibility separation and evidence flow can improve requirement-signal coverage across the selected software-development cases.
+
+---
+
+## Architecture Decision
+
+The important architectural decision is **not simply adding more agents**.
+
+Each agent has a specific responsibility:
+
+1. **Research** identifies task context, requirements, missing information, and risks.
+2. **Requirement Normalization** converts the request into stable, testable requirements.
+3. **Repository Inspection** checks the actual implementation and collects evidence.
+4. **Verification** challenges findings, assumptions, risks, and missing evidence.
+5. **Final Synthesis** converts the verified context into an actionable developer review.
+
+This creates a traceable flow:
+
+```text
+Task
+ ↓
+Requirements
+ ↓
+Repository Evidence
+ ↓
 Verification
-   ↓
-Final Solution
+ ↓
+Final Review
 ```
 
-The application demonstrates how multiple specialized AI agents can work sequentially to turn an ambiguous developer request into a reliable implementation plan.
+---
+
+## Final Decision
+
+The measured evaluation supports the claim that the multi-agent workflow provides broader requirement coverage than the simple baseline across this fixed evaluation set.
+
+**30% baseline → 49% agent workflow → +19 percentage points**
+
+The workflow improved 8 of 12 cases, matched the baseline on 3 cases, and regressed on 1 case.
+
+The regression and evaluation limitations are retained rather than hidden.
+
+The final system therefore emphasizes:
+
+* evidence-backed review
+* requirement traceability
+* independent verification
+* responsibility separation
+* reproducible evaluation
+
+rather than adding agents without a specific purpose.
 
 ---
 
 ## License
 
-This project was created for the Agentic Workflows Hackathon.
+This project was created as part of an agentic workflow hackathon / technical evaluation.

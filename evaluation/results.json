@@ -1,0 +1,356 @@
+{
+  "generatedAt": "2026-08-30T14:14:31.524Z",
+  "cases": 12,
+  "executionMode": "demo",
+  "workflow": "actual-api",
+  "expectedAgentsPerCase": 5,
+  "totalRequirements": 60,
+  "totalFindings": 60,
+  "totalAgentExecutions": 60,
+  "baselineAverage": 30,
+  "agentAverage": 49,
+  "averageImprovement": 19,
+  "improvedCases": 8,
+  "equalCases": 3,
+  "worseCases": 1,
+  "results": [
+    {
+      "id": "case-01",
+      "title": "PDF Upload",
+      "baselineScore": 20,
+      "agentScore": 60,
+      "improvement": 40,
+      "baselineMatchedSignals": [
+        "validation"
+      ],
+      "baselineMissingSignals": [
+        "security",
+        "error handling",
+        "storage",
+        "testing"
+      ],
+      "agentMatchedSignals": [
+        "validation",
+        "security",
+        "testing"
+      ],
+      "agentMissingSignals": [
+        "error handling",
+        "storage"
+      ],
+      "requirements": 5,
+      "findings": 5,
+      "agents": 5
+    },
+    {
+      "id": "case-02",
+      "title": "Stripe Subscriptions",
+      "baselineScore": 17,
+      "agentScore": 50,
+      "improvement": 33,
+      "baselineMatchedSignals": [
+        "authentication"
+      ],
+      "baselineMissingSignals": [
+        "webhook",
+        "authorization",
+        "payment",
+        "error handling",
+        "testing"
+      ],
+      "agentMatchedSignals": [
+        "webhook",
+        "authorization",
+        "testing"
+      ],
+      "agentMissingSignals": [
+        "authentication",
+        "payment",
+        "error handling"
+      ],
+      "requirements": 5,
+      "findings": 5,
+      "agents": 5
+    },
+    {
+      "id": "case-03",
+      "title": "Google Login",
+      "baselineScore": 20,
+      "agentScore": 40,
+      "improvement": 20,
+      "baselineMatchedSignals": [
+        "authentication"
+      ],
+      "baselineMissingSignals": [
+        "callback",
+        "security",
+        "error handling",
+        "testing"
+      ],
+      "agentMatchedSignals": [
+        "security",
+        "testing"
+      ],
+      "agentMissingSignals": [
+        "authentication",
+        "callback",
+        "error handling"
+      ],
+      "requirements": 5,
+      "findings": 5,
+      "agents": 5
+    },
+    {
+      "id": "case-04",
+      "title": "Search",
+      "baselineScore": 40,
+      "agentScore": 40,
+      "improvement": 0,
+      "baselineMatchedSignals": [
+        "input",
+        "validation"
+      ],
+      "baselineMissingSignals": [
+        "performance",
+        "empty",
+        "testing"
+      ],
+      "agentMatchedSignals": [
+        "validation",
+        "testing"
+      ],
+      "agentMissingSignals": [
+        "input",
+        "performance",
+        "empty"
+      ],
+      "requirements": 5,
+      "findings": 5,
+      "agents": 5
+    },
+    {
+      "id": "case-05",
+      "title": "Email Notifications",
+      "baselineScore": 40,
+      "agentScore": 40,
+      "improvement": 0,
+      "baselineMatchedSignals": [
+        "email",
+        "failure"
+      ],
+      "baselineMissingSignals": [
+        "retry",
+        "duplicate",
+        "testing"
+      ],
+      "agentMatchedSignals": [
+        "failure",
+        "testing"
+      ],
+      "agentMissingSignals": [
+        "email",
+        "retry",
+        "duplicate"
+      ],
+      "requirements": 5,
+      "findings": 5,
+      "agents": 5
+    },
+    {
+      "id": "case-06",
+      "title": "CSV Import",
+      "baselineScore": 20,
+      "agentScore": 60,
+      "improvement": 40,
+      "baselineMatchedSignals": [
+        "validation"
+      ],
+      "baselineMissingSignals": [
+        "duplicate",
+        "error handling",
+        "security",
+        "testing"
+      ],
+      "agentMatchedSignals": [
+        "validation",
+        "security",
+        "testing"
+      ],
+      "agentMissingSignals": [
+        "duplicate",
+        "error handling"
+      ],
+      "requirements": 5,
+      "findings": 5,
+      "agents": 5
+    },
+    {
+      "id": "case-07",
+      "title": "Password Reset",
+      "baselineScore": 20,
+      "agentScore": 40,
+      "improvement": 20,
+      "baselineMatchedSignals": [
+        "authentication"
+      ],
+      "baselineMissingSignals": [
+        "token",
+        "expiration",
+        "security",
+        "testing"
+      ],
+      "agentMatchedSignals": [
+        "security",
+        "testing"
+      ],
+      "agentMissingSignals": [
+        "authentication",
+        "token",
+        "expiration"
+      ],
+      "requirements": 5,
+      "findings": 5,
+      "agents": 5
+    },
+    {
+      "id": "case-08",
+      "title": "Image Processing",
+      "baselineScore": 60,
+      "agentScore": 60,
+      "improvement": 0,
+      "baselineMatchedSignals": [
+        "validation",
+        "file",
+        "size"
+      ],
+      "baselineMissingSignals": [
+        "security",
+        "error handling"
+      ],
+      "agentMatchedSignals": [
+        "validation",
+        "file",
+        "security"
+      ],
+      "agentMissingSignals": [
+        "size",
+        "error handling"
+      ],
+      "requirements": 5,
+      "findings": 5,
+      "agents": 5
+    },
+    {
+      "id": "case-09",
+      "title": "Admin Dashboard",
+      "baselineScore": 20,
+      "agentScore": 40,
+      "improvement": 20,
+      "baselineMatchedSignals": [
+        "authentication"
+      ],
+      "baselineMissingSignals": [
+        "authorization",
+        "data",
+        "performance",
+        "testing"
+      ],
+      "agentMatchedSignals": [
+        "authorization",
+        "testing"
+      ],
+      "agentMissingSignals": [
+        "authentication",
+        "data",
+        "performance"
+      ],
+      "requirements": 5,
+      "findings": 5,
+      "agents": 5
+    },
+    {
+      "id": "case-10",
+      "title": "Inventory Update",
+      "baselineScore": 20,
+      "agentScore": 40,
+      "improvement": 20,
+      "baselineMatchedSignals": [
+        "failure"
+      ],
+      "baselineMissingSignals": [
+        "transaction",
+        "duplicate",
+        "concurrency",
+        "testing"
+      ],
+      "agentMatchedSignals": [
+        "failure",
+        "testing"
+      ],
+      "agentMissingSignals": [
+        "transaction",
+        "duplicate",
+        "concurrency"
+      ],
+      "requirements": 5,
+      "findings": 5,
+      "agents": 5
+    },
+    {
+      "id": "case-11",
+      "title": "API Rate Limiting",
+      "baselineScore": 60,
+      "agentScore": 40,
+      "improvement": -20,
+      "baselineMatchedSignals": [
+        "rate limit",
+        "authentication",
+        "error"
+      ],
+      "baselineMissingSignals": [
+        "security",
+        "testing"
+      ],
+      "agentMatchedSignals": [
+        "security",
+        "testing"
+      ],
+      "agentMissingSignals": [
+        "rate limit",
+        "authentication",
+        "error"
+      ],
+      "requirements": 5,
+      "findings": 5,
+      "agents": 5
+    },
+    {
+      "id": "case-12",
+      "title": "File Export",
+      "baselineScore": 20,
+      "agentScore": 80,
+      "improvement": 60,
+      "baselineMatchedSignals": [
+        "validation"
+      ],
+      "baselineMissingSignals": [
+        "authorization",
+        "privacy",
+        "security",
+        "testing"
+      ],
+      "agentMatchedSignals": [
+        "authorization",
+        "validation",
+        "security",
+        "testing"
+      ],
+      "agentMissingSignals": [
+        "privacy"
+      ],
+      "requirements": 5,
+      "findings": 5,
+      "agents": 5
+    }
+  ]
+}
